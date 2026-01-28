@@ -62,6 +62,7 @@ var menuArrange:Array<String>;
 					//newYPos
 				if (menuArrange.indexOf(menuArrange[i], 0) > horizPositions.length){
 					newYPos += 1; //maybe work into a new array<string?
+					// thinking of something like if (index of entry) /  columns and floored could be for a good switch case, i dunno
 				}
 				testPoop = new MenuIcon(horizPositions[i], verticPositions[newYPos], menuArrange[i]);
 				trace(menuArrange[i]);
