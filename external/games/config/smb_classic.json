@@ -1,0 +1,13 @@
+{
+"name": "Super Mario Bros.",
+"shortName": "SMB1R",
+"catchDescription": "The Classic.",
+"description": "The Classic",
+
+"type": "executable",
+"directory": "C://loremipsum",
+"arguments": null,
+
+"icon": "smb_classic"
+
+}

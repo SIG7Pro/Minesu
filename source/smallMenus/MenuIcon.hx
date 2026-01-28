@@ -24,15 +24,18 @@ var gameConfig = haxe.Json.parse(sys.io.File.getContent('assets/data/testGameCon
     public function new(x:Int, y:Int, iconGraphic:String){ // iconGraphic will just be JSON loading, lol.
 			super(x, y);
 
-			if (iconGraphic != null){
-						gameConfig = haxe.Json.parse(sys.io.File.getContent('external/games/config/' + iconGraphic + '.json'));
-
-						border = new FlxSprite();
+			border = new FlxSprite();
 						border.loadGraphic("assets/images/menuBody/mainMenu/Icon Borders.png", true, 170, 170);
 						border.animation.add("idle", [0], 1);
 						border.animation.add("select", [1], 1);
 						border.updateHitbox();
+						border.alpha = 0.01;
 							add(border);
+
+			if (iconGraphic != null){
+						gameConfig = haxe.Json.parse(sys.io.File.getContent('external/games/config/' + iconGraphic + '.json'));
+
+						border.alpha = 1;
 
 						iconMask = new FlxSprite();
 						iconMask.loadGraphic("assets/images/menuBody/mainMenu/Icon Filling.png");
@@ -51,14 +54,16 @@ var gameConfig = haxe.Json.parse(sys.io.File.getContent('assets/data/testGameCon
 						iconToBeClipped.updateHitbox();
 						iconToBeClipped.y = y;
 						iconToBeClipped.x = x;
-			}else{
-			trace("Expected: " + iconGraphic + "at XY:" + x + "," + y);
-			}
+
 
 			icon = new FlxSprite();
 			FlxSpriteUtil.alphaMaskFlxSprite(iconToBeClipped, iconMask, icon); // Seems the image I wanted to mask needed to go before what needed to be masked. Maybe it was in an update? I do not know.
 			icon.updateHitbox();
 				add(icon);
+
+			}else{
+				trace("Expected: " + iconGraphic + "at XY:" + x + "," + y);
+			}
 
     }
 
