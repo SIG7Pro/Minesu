@@ -29,14 +29,12 @@ var gameConfig = haxe.Json.parse(sys.io.File.getContent('assets/data/testGameCon
 						border.animation.add("idle", [0], 1);
 						border.animation.add("select", [1], 1);
 						border.updateHitbox();
-						border.alpha = 0.01;
 							add(border);
 
 			if (iconGraphic != null){
 						gameConfig = haxe.Json.parse(sys.io.File.getContent('external/games/config/' + iconGraphic + '.json'));
 
-						border.alpha = 1;
-
+						border.visible = true;
 						iconMask = new FlxSprite();
 						iconMask.loadGraphic("assets/images/menuBody/mainMenu/Icon Filling.png");
 						iconMask.y = y;
@@ -62,6 +60,7 @@ var gameConfig = haxe.Json.parse(sys.io.File.getContent('assets/data/testGameCon
 				add(icon);
 
 			}else{
+				border.visible = false;
 				trace("Expected: " + iconGraphic + "at XY:" + x + "," + y);
 			}
 

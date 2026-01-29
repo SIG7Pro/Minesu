@@ -29,8 +29,6 @@ var menuArrange:Array<String>;
 		super.create();
 		menuArrange = homeLayout.arrangement;
 
-		//var placement:Array<String> = haxe.Json.parse(menuArrange);
-
 		var deg:FlxText;
 				deg = new FlxText((122), (156)); // x, y, width
 				deg.text = "Layout:" + haxe.Json.stringify(menuArrange); // Very convinient...
@@ -46,6 +44,12 @@ var menuArrange:Array<String>;
 
 		var newYPos:Int = 0;
 
+		// user slameron suggested the idea of reading from an array and then moving based on division and stuff
+					// so in theory i could turn the home_layout.json file into maybe some kinda global storage/options file too
+					// as quoted from him or her:
+						// if its all an array you could do insert on the array at the index you want it at and for the grid the x index would be the array position % columns and the y index would be Math.floor(array position / columns), i think
+
+
 		for (h in 0...verticPositions.length){
 			for (i in 0...horizPositions.length){
 				iconSlot = new FlxSprite();
@@ -56,19 +60,14 @@ var menuArrange:Array<String>;
 				add(iconSlot);
 
 				var testPoop:MenuIcon;
-				//testPoop = new MenuIcon(horizPositions[i], verticPositions[h], "exampleIcon1"); // vPos aligns with 0, 1, 2, and 3. // hPos aligns with the arrays.
-				// user slameron suggested the idea of reading from an array and then moving based on division and stuff
-					// so in theory i could turn the home_layout.json file into maybe some kinda global storage/options file too
-					//newYPos
+
 				if (menuArrange.indexOf(menuArrange[i], 0) > horizPositions.length){
 					newYPos += 1; //maybe work into a new array<string?
 					// thinking of something like if (index of entry) /  columns and floored could be for a good switch case, i dunno
 				}
 				testPoop = new MenuIcon(horizPositions[i], verticPositions[newYPos], menuArrange[i]);
 				trace(menuArrange[i]);
-				//add(testPoop);
 				curMadeSelectionIcons.add(testPoop);
-				//trace("Entry: " + horizPositions[i] + ", " + verticPositions[h] + ".");
 			}
 		}
 
