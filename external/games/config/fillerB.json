@@ -1,0 +1,13 @@
+{
+"name": "fillerB",
+"shortName": "fillerB",
+"catchDescription": "A Remake / Celebration of the original 'Super Mario Bros.' games.",
+"description": "A Remake / Celebration of the original 'Super Mario Bros.' games. Features new levels, custom modes, new characters, alongside a full level editor / custom level system!",
+
+"type": "executable",
+"directory": "C://loremipsum",
+"arguments": null,
+
+"icon": "ex2"
+
+}
