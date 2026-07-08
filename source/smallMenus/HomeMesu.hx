@@ -7,6 +7,12 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 import smallMenus.MenuIcon;
 
+#if hxdiscord_rpc
+import hxdiscord_rpc.Discord;
+import hxdiscord_rpc.Types;
+import sys.thread.Thread;
+#end
+
 class HomeMesu extends FlxSubState
 {
 
@@ -36,8 +42,10 @@ var layout_yPosition_Before_Recount:Int = 0; // I think I'll use this simialry o
 		menuArrange = homeLayout.arrangement;
 		rows = horizPositions.length;
 		columns = verticPositions.length;
-
-
+#if hxdiscord_rpc
+final discordPresence:DiscordRichPresence = new DiscordRichPresence();
+		discordPresence.state = "Homepage";
+#end
 		var deg:FlxText;
 				deg = new FlxText((FlxG.width - 600), 156, 500); // x, y, width
 				deg.text = "Layout:" + haxe.Json.stringify(menuArrange); // Very convinient...
@@ -70,8 +78,12 @@ var layout_yPosition_Before_Recount:Int = 0; // I think I'll use this simialry o
 					var xPos:Int;
 					var yPos:Int;
 
-					xPos = horizPositions[ Std.int(rows - menuArrange.indexOf(menuArrange[i]) ) ];
-					yPos = verticPositions[ Std.int(columns / menuArrange.indexOf(menuArrange[i]))       ];
+					// COME UP WITH NEW MATH ASAP!!! AAAAAAH!!!
+
+					//xPos = horizPositions[ Math.floor(rows + menuArrange.indexOf(menuArrange[i]) ) ];
+					xPos = horizPositions[ 0 - Std.int(rows  /  menuArrange.indexOf(menuArrange[i]) )  ];
+					//trace(xPos);
+					yPos = verticPositions[ 0 - Std.int(columns / menuArrange.indexOf(menuArrange[i]))       ];
 					testPoop = new MenuIcon(
 					//horizPositions[ Std.int( (menuArrange.indexOf(menuArrange[i], 0) / rows * 10))],
 					//verticPositions[  Std.int( menuArrange.indexOf(menuArrange[i], 0)  / columns * 10)],
@@ -80,6 +92,7 @@ var layout_yPosition_Before_Recount:Int = 0; // I think I'll use this simialry o
 					menuArrange[i]);
 					//trace(menuArrange[i] + ", x: " + Std.int(menuArrange.indexOf(menuArrange[i], 0) / rows * 10) + ", y: " + Std.int(menuArrange.indexOf(menuArrange[i], 0) / columns * 10) + ", Index: " + menuArrange.indexOf(menuArrange[i], 0));
 					trace("Index: " + menuArrange.indexOf(menuArrange[i], 0) + ", X: " + xPos + ", Y: " + yPos);
+					//trace(rows + menuArrange.indexOf(menuArrange[i]));
 				//add(testPoop);
 					curMadeSelectionIcons.add(testPoop);
 
