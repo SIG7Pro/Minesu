@@ -87,14 +87,15 @@
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Default Icons-->
+
+	<icon path="assets/system/images/icons/Logo-v2-Final.png" unless="mac"/>
+
 	<section unless="debug">
-		<icon path="assets/system/images/icons/BasicNe.png" unless="mac || debug"/>
-		<icon path="assets/system/images/icons/macOS Icon New.png" if="mac" unless="debug"/>
+		<icon path="assets/system/images/icons/macOS Icon.png" if="mac" unless="debug"/>
 	</section>
 	<section if="debug || hl">
 		<echo value="You are compiling with debug mode. Proceed with caution!" />
-		<!--Debug Icons, don't work.-->
-		<icon path="assets/system/images/icons/BasicNew - Debug.png" unless="mac"/>
+		<!--Debug Icons.-->
 		<icon path="assets/system/images/icons/macOS Icon New - Debug.png" if="mac"/>
 	</section>
 
