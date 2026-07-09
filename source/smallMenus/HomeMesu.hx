@@ -7,12 +7,6 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.group.FlxSpriteGroup;
 import smallMenus.MenuIcon;
 
-#if hxdiscord_rpc
-import hxdiscord_rpc.Discord;
-import hxdiscord_rpc.Types;
-import sys.thread.Thread;
-#end
-
 class HomeMesu extends FlxSubState
 {
 
@@ -40,12 +34,9 @@ var layout_yPosition_Before_Recount:Int = 0; // I think I'll use this simialry o
 
 		//menuArrange:new(string);
 		menuArrange = homeLayout.arrangement;
-		rows = horizPositions.length;
-		columns = verticPositions.length;
-#if hxdiscord_rpc
-final discordPresence:DiscordRichPresence = new DiscordRichPresence();
-		discordPresence.state = "Homepage";
-#end
+		columns = horizPositions.length;
+		rows = verticPositions.length;
+
 		var deg:FlxText;
 				deg = new FlxText((FlxG.width - 600), 156, 500); // x, y, width
 				deg.text = "Layout:" + haxe.Json.stringify(menuArrange); // Very convinient...
@@ -59,15 +50,12 @@ final discordPresence:DiscordRichPresence = new DiscordRichPresence();
 
 		curMadeSelectionIcons = new FlxTypedGroup<MenuIcon>();
 
-		// user slameron suggested the idea of reading from an array and then moving based on division and stuff
+		// user slameron in the haxe discord suggested the idea of reading from an array and then moving based on division and stuff
 					// so in theory i could turn the home_layout.json file into maybe some kinda global storage/options file too
 					// as quoted from him or her:
 						// if its all an array you could do insert on the array at the index you want it at and for the grid the x index would be the array position % columns and the y index would be Math.floor(array position / columns), i think
 
 			makeBlankSpaces();
-
-		//
-
 
 		//var menuArrange.length;
 				for (i in 0...menuArrange.length){
@@ -77,26 +65,24 @@ final discordPresence:DiscordRichPresence = new DiscordRichPresence();
 					var testPoop:MenuIcon;
 					var xPos:Int;
 					var yPos:Int;
-
+					var currentIndex:Int;
+					currentIndex = menuArrange.indexOf(menuArrange[i]);
 					// COME UP WITH NEW MATH ASAP!!! AAAAAAH!!!
 
-					//xPos = horizPositions[ Math.floor(rows + menuArrange.indexOf(menuArrange[i]) ) ];
-					xPos = horizPositions[ 0 - Std.int(rows  /  menuArrange.indexOf(menuArrange[i]) )  ];
-					//trace(xPos);
-					yPos = verticPositions[ 0 - Std.int(columns / menuArrange.indexOf(menuArrange[i]))       ];
-					testPoop = new MenuIcon(
-					//horizPositions[ Std.int( (menuArrange.indexOf(menuArrange[i], 0) / rows * 10))],
-					//verticPositions[  Std.int( menuArrange.indexOf(menuArrange[i], 0)  / columns * 10)],
-					xPos,
-					yPos,
-					menuArrange[i]);
-					//trace(menuArrange[i] + ", x: " + Std.int(menuArrange.indexOf(menuArrange[i], 0) / rows * 10) + ", y: " + Std.int(menuArrange.indexOf(menuArrange[i], 0) / columns * 10) + ", Index: " + menuArrange.indexOf(menuArrange[i], 0));
-					trace("Index: " + menuArrange.indexOf(menuArrange[i], 0) + ", X: " + xPos + ", Y: " + yPos);
-					//trace(rows + menuArrange.indexOf(menuArrange[i]));
-				//add(testPoop);
-					curMadeSelectionIcons.add(testPoop);
+					/*xPos = horizPositions[ 0 - Std.int(rows  /  currentIndex) )  ];
+					yPos = verticPositions[ 0 - Std.int(columns / currentIndex))       ]; */ // Old math.
 
-					// seems like duplicates just spawn in the same place as the OG ones? idk for sure
+					// Reference math:
+						// spr.x += 180 * ((grpOptions.members.length % MAX_PER_ROW) - MAX_PER_ROW/2) + spr.width / 2 + 15;
+
+					xPos = horizPositions[Std.int(currentIndex % columns) ];
+					//yPos = verticPositions[ 0 - Std.int(columns / currentIndex))]; // Old yPos Math.s
+					yPos = verticPositions[ Math.floor(currentIndex / columns)  ];
+
+					testPoop = new MenuIcon( xPos, yPos,	menuArrange[i]);
+					trace("Old Trace -- Index: " + currentIndex + ", X: " + xPos + ", Y: " + yPos);
+					//trace("New Trace -- Columns: " + columns + ", Index: " + currentIndex) + ", Division (index percentage columns): " + ( (currentIndex) % columns)  ) + ", Placement in horizPositions " + xPos + ". \n");
+					curMadeSelectionIcons.add(testPoop);
 				}
 
 				add (curMadeSelectionIcons);
