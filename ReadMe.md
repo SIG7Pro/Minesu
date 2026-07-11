@@ -1,6 +1,8 @@
 # Minesu
 > A miniature scaled launcher for your PC! :ram:
-![banner](https://www.github.com/MinesuHX/Minesu/raw/master/assets/system/images/Banner.png "Minesu Banner")
+ 
+![banner](https://repository-images.githubusercontent.com/1091421881/5d2a56b5-2b0d-42df-9bfb-6f7f1e195d1e "Minesu Banner")
+
 (WIP description.)
 
 ## Disclaimer
