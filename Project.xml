@@ -19,7 +19,7 @@
 	<window width="1280" height="720" fps="60" background="#0000FF" hardware="true" vsync="false" />
 
 	<!--HTML5-specific-->
-	<window if="html5" resizable="false" /> <!-- I feel the only instance where I would make a web version would be an app that would launch other websites, but then that's what the New Tab page is for.
+	<window if="html5" resizable="false" /> <!-- Supporting HTML would require too much code to be removed or rewritten for a fraction of the utility. -->
 
 	<!--Desktop-specific-->
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />

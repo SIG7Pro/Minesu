@@ -128,11 +128,11 @@ var systemBar:FlxSprite;
 
 	function createWallpaper(){
 		backgroundA = new FlxSprite();
-			backgroundA.loadGraphic("assets/images/backgrounds/Wallpaper.png");
+			backgroundA.loadGraphic("assets/images/backgrounds/Home_Light.png"); // I'm thinking that maybe I could be able to change this for menus.
 			backgroundA.screenCenter();
-			backgroundA.color = 0xFFe9ebff;
+			//backgroundA.color = 0xFFe9ebff; // Tint, unused.
 			add(backgroundA);
-		backgroundB = new FlxSprite();
+		/*backgroundB = new FlxSprite();
 			backgroundB.loadGraphic("assets/images/backgrounds/Gradient.png");
 			backgroundB.screenCenter();
 			backgroundB.color = 0xFFc7cae5;
@@ -142,7 +142,7 @@ var systemBar:FlxSprite;
 			backgroundDots.screenCenter();
 			backgroundDots.blend = "screen";
 			backgroundDots.alpha = 0.1;
-			add(backgroundDots);
+			add(backgroundDots);*/
 	}
 
 	override public function update(elapsed:Float){
