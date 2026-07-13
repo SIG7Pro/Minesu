@@ -55,6 +55,8 @@ var menuXPositions:Array<Int> = [103, 273, 443, 613];
 
 var systemBar:FlxSprite;
 
+var tsp:FlxText;
+
 	override public function create()
 	{
 		persistentUpdate = true;
@@ -80,9 +82,6 @@ var systemBar:FlxSprite;
 		menuPrimaryButtons = new FlxTypedGroup<FlxSprite>();
 		add(menuPrimaryButtons);
 
-		//menuXPositions = new Array<Int>();
-		//add(menuXPositions);
-
 		menuBody = new FlxSprite();
 		menuBody.loadGraphic("assets/images/menuBody/mainMenu/Main Body.png");
 		menuBody.x = 103;
@@ -90,16 +89,21 @@ var systemBar:FlxSprite;
 		menuBody.color = 0xFFFFFFFF;
 		add(menuBody);
 
+				tsp = new FlxText((FlxG.width - 1000), 156, 500); // x, y, width
+				tsp.text = "Place: None";
+				tsp.setFormat("FOT-RodinBokutohPro-B.otf", 25, 0xff403a46);
+				tsp.antialiasing = true;
+				tsp.updateHitbox();
+				add(tsp);
 
-
-		openSubState(new HomeMesu());
+		//openSubState(new HomeMesu());
 
 
 
 		systemBar = new FlxSprite();
 		systemBar.loadGraphic("assets/images/bottomBar/bar.png");
 		systemBar.y = FlxG.height - systemBar.height;
-		add(systemBar);
+		//add(systemBar);
 
 
 
@@ -132,22 +136,24 @@ var systemBar:FlxSprite;
 			backgroundA.screenCenter();
 			//backgroundA.color = 0xFFe9ebff; // Tint, unused.
 			add(backgroundA);
-		/*backgroundB = new FlxSprite();
-			backgroundB.loadGraphic("assets/images/backgrounds/Gradient.png");
-			backgroundB.screenCenter();
-			backgroundB.color = 0xFFc7cae5;
-			add(backgroundB);
-		backgroundDots = new FlxSprite();
-			backgroundDots.loadGraphic("assets/images/backgrounds/Dots.png");
-			backgroundDots.screenCenter();
-			backgroundDots.blend = "screen";
-			backgroundDots.alpha = 0.1;
-			add(backgroundDots);*/
 	}
 
 	override public function update(elapsed:Float){
 		super.update(elapsed);
 		appGetDate();
+
+		if (FlxG.keys.pressed.Q)
+		{
+			openSubState(new HomeMesu());
+			tsp.text = "Place: HomeMesu.hx";
+		}
+		if (FlxG.keys.pressed.E)
+		{
+			//openSubState(new HomeMesu());
+			tsp.text = "Place: Alternative";
+			// This can be ran when the substate is active, so I'd be easily able to close the substate.
+		}
+
 	}
 
 	function appGetDate(){ // to whoever sees the first commit of this, say thank you to spile from the haxe discord
@@ -164,12 +170,8 @@ var systemBar:FlxSprite;
 
 			currentDate = "" + (now.getMonth() + 1) + "/" + (now.getDate()) + " - " + // MM/DD
 			hourTwelve  + ":" + padZero("" + now.getMinutes()) +  (if (isPMTime) " PM" else " AM") + // Hours + Minutes + AMPM
-			/*#if debug
-			"\nDebug build ran by " +
+			#if debug "\nDebug Build"; // I'd make this a one-liner, but I'd get a weird error if I did.
 			#end
-			"" + systemUsername*/
-			#if debug
-			"\nDebug Build" #end;
 
 			statisticsText.text = currentDate;
 			// Seconds for if I get to put an option to add seconds to the menu. /* + ":" padZero("" + now.getSeconds()) +*/

@@ -7,12 +7,24 @@
 
 ## Disclaimer
 - This is my first attempt at something like this. Please have patience!
-- Due to this intending to be a "smaller" launcher app/frontend, ==many features you would expect may not be included==.
+- Due to this intending to be a "smaller" launcher app/frontend, **many features you would expect may not be included**.
+
+## System Requirements
+### Minimum Specs
+- RAM: 8 MB
+    - (This is heavily bound to change! Especially as this very bare-bones version of the app only runs with 4 MB on Hashlink ran with a 16GB RAM system!)
+- CPU: Unknown
+### Recommended Specs:
+- RAM: 16 GB
 
 ## Compiling
-This segment is to be rewritten.
+Open your default command prompt and type in:
 
-### Requirements:
+`lime test sys` (replacing sys with your platform of choice, which includes Hashlink.)
+
+***This is to be done after all the requirements are met!*** Also unless old versions of Haxe are used, you cannot compile for macOS 10.12 or earlier.
+
+#### Requirements:
 - [Haxe](https://haxe.org)
 - [HaxeFlixel](https://haxeflixel.com)
 - hxdiscord_rpc (Optional)
@@ -22,7 +34,7 @@ As HaxeFlixel and both hxdiscord_rpc are both haxelibs, you can easily type:
 `haxelib install haxeflixel` and `haxelib install hxdiscord_rpc` to install the libraries.
 In addition, the average computer should be able to compile it.
 
-#### System Specific
+##### System Specific
 Windows requires a version of Microsoft Visual Studio to compile it. As far as I know, Visual Studio Community 2019 compiles it perfectly.
 
 Linux has no specific requirements.
@@ -54,3 +66,17 @@ Hashlink compiles perfectly outside of the box, however it lacks Discord RPC by 
     - Networking (obvious)
     
     However if you'd like to commit any of these changes, then feel free! But they won't be maintained by me.
+
+# Project Structure
+
+## Assets
+
+To be documented when project is more complete.
+
+## Source Code
+
+- Main.hx - The head of the project. Allows for minimal configuration to occur.
+    - AssetPaths.hx - Stock code. Exact purpose is unknown, it could be alien!
+    - import.hx - Used for importing certain HX files easily, clear purpose for those familiar with Haxe programming.
+    
+- Menu.hx - What holds all of the menus together.
