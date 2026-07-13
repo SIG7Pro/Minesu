@@ -29,7 +29,7 @@
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
-	<set name="BUILD_DIR" value="export" />
+	<set name="BUILD_DIR" value="build" /> <!-- To avoid getting the 'extenal' folder (for unique content) mixed up with where the builds go, which was called 'export.'-->
 	<source path="source" />
 	<assets path="assets" />
 	<assets path="external" />
