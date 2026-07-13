@@ -26,9 +26,9 @@ Open your default command prompt and type in:
 ***This is to be done after all the requirements are met!*** Also unless old versions of Haxe are used, you cannot compile for macOS 10.12 or earlier.
 
 #### Requirements:
-- [Haxe](https://haxe.org)
-- [HaxeFlixel](https://haxeflixel.com)
-- hxdiscord_rpc (Optional)
+- [Haxe](https://haxe.org/download/)
+- [HaxeFlixel](https://haxeflixel.com/documentation/install-haxeflixel/)
+- [hxdiscord_rpc](https://lib.haxe.org/p/hxdiscord_rpc/) (Optional)
 
 As HaxeFlixel and both hxdiscord_rpc are both haxelibs, you can easily type:
 
