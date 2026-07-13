@@ -8,6 +8,7 @@
 ## Disclaimer
 - This is my first attempt at something like this. Please have patience!
 - Due to this intending to be a "smaller" launcher app/frontend, **many features you would expect may not be included**.
+- This is multi-platform for the major desktop operating systems!
 
 ## System Requirements
 ### Minimum Specs
