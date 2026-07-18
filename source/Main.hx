@@ -10,11 +10,14 @@ import hxdiscord_rpc.Types;
 import sys.thread.Thread;
 #end
 
+import haxe.ui.Toolkit;
+
 class Main extends Sprite
 {
 	public function new()
 	{
 		super();
+		Toolkit.init();
 		addChild(new FlxGame(1920, 1080, Menu));
 		FlxG.mouse.load('assets/images/cursor.png');
 

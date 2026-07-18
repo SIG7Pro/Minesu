@@ -35,6 +35,11 @@ As HaxeFlixel and both hxdiscord_rpc are both haxelibs, you can easily type:
 `haxelib install haxeflixel` and `haxelib install hxdiscord_rpc` to install the libraries.
 In addition, the average computer should be able to compile it.
 
+#### Tested
+Tested on:
+- Windows 11 w/ 16 GB RAM: Working, primary dev machine, virtualized in Hashlink and natively.
+- Windows 7 with 4GB RAM: Working, outdated build, virtualized.
+
 ##### System Specific
 Windows requires a version of Microsoft Visual Studio to compile it. As far as I know, Visual Studio Community 2019 compiles it perfectly.
 

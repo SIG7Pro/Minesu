@@ -55,7 +55,10 @@ var menuXPositions:Array<Int> = [103, 273, 443, 613];
 
 var systemBar:FlxSprite;
 
-var tsp:FlxText;
+var tsp:FlxText; // Status text. Temporary.
+var canSwitchTabs:Bool = true;
+var menuTab:Int = 0; // 0 is the new 1, so when the variable is 4 then it should be 3, or wrap around to 0.
+var changeValue:Int; // for one function just so i can reference it omg
 
 	override public function create()
 	{
@@ -139,22 +142,66 @@ var tsp:FlxText;
 	}
 
 	override public function update(elapsed:Float){
+
 		super.update(elapsed);
 		appGetDate();
 
-		if (FlxG.keys.pressed.Q)
-		{
-			openSubState(new HomeMesu());
-			tsp.text = "Place: HomeMesu.hx";
-		}
-		if (FlxG.keys.pressed.E)
-		{
-			//openSubState(new HomeMesu());
-			tsp.text = "Place: Alternative";
-			// This can be ran when the substate is active, so I'd be easily able to close the substate.
+		// For the status changing stuff. The text stuff is to be removed soon.
+					if(menuTab == -1){menuTab = 3;}
+					if(menuTab == 4) {menuTab = 0;}
+					tsp.text = "Current Tab: " + menuEntries[menuTab] + ", Entry #" + menuTab + "\n Proper Entry: " + (menuTab + 1);
+
+
+		if (canSwitchTabs){ // The inputs can be accessed within the substates, so they can easily work.
+				if (FlxG.keys.justPressed.Q)
+				{
+						menuPrimaryButtons.members[menuTab].animation.play("idle");
+						//menuTab -= 1;
+						pageSwitch(-1);
+				}
+				if (FlxG.keys.justPressed.E)
+				{
+					//openSubState(new HomeMesu());
+					menuPrimaryButtons.members[menuTab].animation.play("idle");
+					//menuTab += 1;
+					pageSwitch(1);
+				}
 		}
 
+
 	}
+
+
+	function pageSwitch(changeValue:Int){
+
+				trace(menuEntries[menuTab]);
+
+				/*if (changeValue < 0){ // For values in the negatives.
+				menuTab +
+				}else if (changeValue < 0){ // For values in the positives.
+
+				}*/
+
+				//if (changeValue == null){changeValue = 1;}
+				menuTab += changeValue;
+
+				//if
+				if (menuTab > -1 || menuTab < 4){
+					menuPrimaryButtons.members[menuTab].animation.play("select");
+					trace("true");
+				}
+
+
+				if (menuTab == 0){ // Will be replaced with a case switch soon.
+							openSubState(new HomeMesu());
+							//tsp.text = "Place: HomeMesu.hx (" + menuEntries[menuTab] + ")";
+				}
+				if (menuTab == 2){ // Will be replaced with a case switch soon.
+							openSubState(new SettingsArea());
+				}
+
+	}
+
 
 	function appGetDate(){ // to whoever sees the first commit of this, say thank you to spile from the haxe discord
 		var now = Date.now();
