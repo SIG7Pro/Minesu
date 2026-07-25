@@ -18,6 +18,11 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import smallMenus.*;
 import flixel.FlxSubState;
 
+import flixel.tweens.FlxTween; // this should be it.
+import flixel.tweens.FlxEase;
+// https://haxeflixel.com/demos/FlxTween/ Worth it.
+import flixel.util.FlxTimer;
+
 
 class Menu extends FlxState
 {
@@ -67,20 +72,43 @@ var changeValue:Int; // for one function just so i can reference it omg
 		super.create();
 		createWallpaper();
 
-		mainText = new FlxText((122 - 6 - 1), (60 - 6), 500); // x, y, width
+		mainText = new FlxText(115, 54, 500); // x, y, width
 		mainText.text = nameTitle;
 		mainText.setFormat(defaultFont, 52, mainColor);
 		mainText.antialiasing = true;
 		mainText.updateHitbox();
 		add(mainText);
 
-		statisticsText = new FlxText((1801), (70 + 3 - 6), 500); // x, y, width
+		// Ensure that it can get to its required position.
+		mainText.alpha = 0.01; // So it can be loaded, as I heard doing an alpha of 0 just deloads the sprite.
+		mainText.x += 75;
+		FlxTween.tween(mainText, {x: 115, alpha: 1}, 0.5,
+			{type: FlxTweenType.ONESHOT, ease: FlxEase.cubeOut});
+
+
+		statisticsText = new FlxText(1800, 67, 500); // x, y, width
 		statisticsText.text = "____";
 		statisticsText.setFormat(defaultFont, 24, mainColor, RIGHT);
 		statisticsText.x = (1920 - 119 + 3) - statisticsText.width; // Should work with custom screen resolutions when the time comes for that.
 		statisticsText.antialiasing = true;
 		statisticsText.updateHitbox();
 		add(statisticsText);
+		statisticsText.alpha = 0.01;
+		statisticsText.x += 30;
+
+		var timer:FlxTimer = new FlxTimer();
+		timer.start(0.5,
+
+		(_) -> {	FlxTween.tween(statisticsText, {x:50, alpha: 1}, 1,
+			{type: FlxTweenType.ONESHOT, ease: FlxEase.cubeOut});}
+
+		);
+
+		/*var timer2:FlxTimer = new FlxTimer();
+		timer2.start(2,
+
+		(_) -> {trace("X: " + statisticsText.x);});*/
+
 
 		menuPrimaryButtons = new FlxTypedGroup<FlxSprite>();
 		add(menuPrimaryButtons);
@@ -184,11 +212,14 @@ var changeValue:Int; // for one function just so i can reference it omg
 
 				//if (changeValue == null){changeValue = 1;}
 				menuTab += changeValue;
+				trace("Changed value by:" + changeValue);
 
-				//if
-				if (menuTab > -1 || menuTab < 4){
+				//if (menuTab > -1 || menuTab < 4){
+				if (menuTab != -1 || menuTab != 4){ // Checks if it's not either -1 or +4.
 					menuPrimaryButtons.members[menuTab].animation.play("select");
 					trace("true");
+				}else{
+
 				}
 
 
