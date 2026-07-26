@@ -4,31 +4,26 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 
-import flixel.ui.FlxButton;
-import flixel.util.FlxColor;
-
-import sys.FileSystem;
 import flixel.text.FlxText;
-import Sys; //lowercase and uppercase Sys aer differetn!
+import Sys; // For name detection.
+import Date; // For the date
+import flixel.group.FlxGroup.FlxTypedGroup; // For menu buttons.
 
-import Date;
-
-import flixel.group.FlxGroup.FlxTypedGroup;
-
+/* For submenus */
 import smallMenus.*;
 import flixel.FlxSubState;
 
+/* For animations. */
 import flixel.tweens.FlxTween; // this should be it.
 import flixel.tweens.FlxEase;
 // https://haxeflixel.com/demos/FlxTween/ Worth it.
 import flixel.util.FlxTimer;
 
-
 class Menu extends FlxState
 {
 
-var backgroundA:FlxSprite;
-var backgroundB:FlxSprite;
+var backgroundHome:FlxSprite;
+var backgroundSetting:FlxSprite;
 var backgroundDots:FlxSprite; // Wallpaper
 
 // Text
@@ -71,6 +66,21 @@ var changeValue:Int; // for one function just so i can reference it omg
  		persistentDraw = true;
 		super.create();
 		createWallpaper();
+		//#if hl // Could be made into an option soon.
+		//var skidaddble:Int = 0;
+				lime.app.Application.current.window.opacity = 0;
+		//function tweenFunction(s:FlxSprite, v:Float) { lime.app.Application.current.window.opacity = skidaddble; };
+
+		///var titleTween:FlxTween;
+		//titleTween = FlxTween.num = (0, skidaddble, type: ONESHOT, {lime.app.Application.current.window.opacity = value;});
+		//titleTween.num = (0, 1, 1, {type: ONESHOT}, (_) -> {lime.app.Application.current.window.opacity = value;});
+		backgroundHome.alpha = 1;
+		FlxTween.tween(lime.app.Application.current.window, {opacity: 1}, 0.5, {type: FlxTweenType.ONESHOT, ease: FlxEase.cubeOut});
+
+		// Modified from https://discord.com/channels/162395145352904705/165234904815239168/950650164295651358 while trying to look for an example of tweening an integer which I thought I needed but realized I could've used this.
+		/*#else
+		FlxTween.tween(backgroundHome, {alpha: 1}, 0.5,{type: FlxTweenType.ONESHOT, ease: FlxEase.cubeOut});
+		#end*/
 
 		mainText = new FlxText(115, 54, 500); // x, y, width
 		mainText.text = nameTitle;
@@ -82,9 +92,13 @@ var changeValue:Int; // for one function just so i can reference it omg
 		// Ensure that it can get to its required position.
 		mainText.alpha = 0.01; // So it can be loaded, as I heard doing an alpha of 0 just deloads the sprite.
 		mainText.x += 75;
+		var timer:FlxTimer = new FlxTimer();
+		timer.start(0.25,
+		(_) -> {
 		FlxTween.tween(mainText, {x: 115, alpha: 1}, 0.5,
 			{type: FlxTweenType.ONESHOT, ease: FlxEase.cubeOut});
-
+		}
+		);
 
 		statisticsText = new FlxText(1800, 67, 500); // x, y, width
 		statisticsText.text = "____";
@@ -93,22 +107,16 @@ var changeValue:Int; // for one function just so i can reference it omg
 		statisticsText.antialiasing = true;
 		statisticsText.updateHitbox();
 		add(statisticsText);
-		statisticsText.alpha = 0.01;
+
+		var staTextNeed = statisticsText.x;
 		statisticsText.x += 30;
+		statisticsText.alpha = 0.01;
 
 		var timer:FlxTimer = new FlxTimer();
-		timer.start(0.5,
-
-		(_) -> {	FlxTween.tween(statisticsText, {x:50, alpha: 1}, 1,
+		timer.start(1,
+		(_) -> {	FlxTween.tween(statisticsText, {x:staTextNeed, alpha: 1}, 1,
 			{type: FlxTweenType.ONESHOT, ease: FlxEase.cubeOut});}
-
 		);
-
-		/*var timer2:FlxTimer = new FlxTimer();
-		timer2.start(2,
-
-		(_) -> {trace("X: " + statisticsText.x);});*/
-
 
 		menuPrimaryButtons = new FlxTypedGroup<FlxSprite>();
 		add(menuPrimaryButtons);
@@ -162,11 +170,17 @@ var changeValue:Int; // for one function just so i can reference it omg
 	}
 
 	function createWallpaper(){
-		backgroundA = new FlxSprite();
-			backgroundA.loadGraphic("assets/images/backgrounds/Home_Light.png"); // I'm thinking that maybe I could be able to change this for menus.
-			backgroundA.screenCenter();
-			//backgroundA.color = 0xFFe9ebff; // Tint, unused.
-			add(backgroundA);
+			backgroundHome = new FlxSprite();
+			backgroundHome.loadGraphic("assets/images/backgrounds/Home_Light.png");
+			backgroundHome.screenCenter();
+			backgroundHome.alpha = 0.01;
+			add(backgroundHome);
+
+			backgroundSetting = new FlxSprite();
+			backgroundSetting.loadGraphic("assets/images/backgrounds/Home_Light.png");
+			backgroundSetting.screenCenter();
+			backgroundSetting.alpha = 0.01;
+			add(backgroundSetting);
 	}
 
 	override public function update(elapsed:Float){
@@ -175,27 +189,49 @@ var changeValue:Int; // for one function just so i can reference it omg
 		appGetDate();
 
 		// For the status changing stuff. The text stuff is to be removed soon.
-					if(menuTab == -1){menuTab = 3;}
+					/*if(menuTab == -1){menuTab = 3;}
 					if(menuTab == 4) {menuTab = 0;}
-					tsp.text = "Current Tab: " + menuEntries[menuTab] + ", Entry #" + menuTab + "\n Proper Entry: " + (menuTab + 1);
+					tsp.text = "Current Tab: " + menuEntries[menuTab] + ", Entry #" + menuTab + "\n Proper Entry: " + (menuTab + 1);*/
+
+					if (menuTab < 0){ // If menuTab is less than 0.
+							menuTab = 3;
+						}
+					if (menuTab > 3){ // If menuTab is 4, wrap around to 0.
+							menuTab = 0;
+						}
 
 
 		if (canSwitchTabs){ // The inputs can be accessed within the substates, so they can easily work.
+				trace("Before: " + menuTab);
 				if (FlxG.keys.justPressed.Q)
 				{
 						menuPrimaryButtons.members[menuTab].animation.play("idle");
 						//menuTab -= 1;
-						pageSwitch(-1);
+						if (menuTab >= 0){ // If menuTab is 0 or higher.
+							pageSwitch(-1);
+						}else{ // If menuTab is -1, wrap around to 3.
+							menuTab = 3;
+						}
+
 				}
 				if (FlxG.keys.justPressed.E)
 				{
 					//openSubState(new HomeMesu());
 					menuPrimaryButtons.members[menuTab].animation.play("idle");
 					//menuTab += 1;
-					pageSwitch(1);
+					/*if (menuTab > 3){
+							pageSwitch(1);
+						}else{
+							menuTab = 0;
+						}*/
+					if (menuTab > 3){ // If menuTab is 4, wrap around to 0.
+							menuTab = 0;
+						}else{ // If menuTab isn't 4.
+							pageSwitch(1);
+					}
 				}
+				trace("After: " + menuTab);
 		}
-
 
 	}
 
@@ -243,7 +279,12 @@ var changeValue:Int; // for one function just so i can reference it omg
 		if (isPMTime){
 			hourTwelve = ("" + (now.getHours() - 12)); // Gets hour of the day and subtracts it by 12 for the proper time in the P.Ms.
 		}else{
-			hourTwelve = ("" + now.getHours());
+			if (now.getHours() == 0){
+					hourTwelve = ("12"); // To solve hours such as 12 AM being listed as 0 AM.
+			}else{
+					hourTwelve = ("" + now.getHours());
+			}
+
 		}
 
 			currentDate = "" + (now.getMonth() + 1) + "/" + (now.getDate()) + " - " + // MM/DD

@@ -16,6 +16,7 @@ class Main extends Sprite
 {
 	public function new()
 	{
+		lime.app.Application.current.window.opacity = 0;
 		super();
 		Toolkit.init();
 		addChild(new FlxGame(1920, 1080, Menu));

@@ -30,7 +30,7 @@ class SettingsArea extends FlxSubState
 		super.create();
 
 		var deg:FlxText;
-				deg = new FlxText((FlxG.width - 600), 156, 500); // x, y, width
+				deg = new FlxText((FlxG.width - 600), 270, 500); // x, y, width
 				deg.text = "Settings?"; // Very convinient...
 				deg.setFormat("FOT-RodinBokutohPro-B.otf", 25, 0xff403a46);
 				deg.antialiasing = true;
