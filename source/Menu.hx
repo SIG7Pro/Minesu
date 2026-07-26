@@ -188,47 +188,20 @@ var changeValue:Int; // for one function just so i can reference it omg
 		super.update(elapsed);
 		appGetDate();
 
-		// For the status changing stuff. The text stuff is to be removed soon.
-					/*if(menuTab == -1){menuTab = 3;}
-					if(menuTab == 4) {menuTab = 0;}
-					tsp.text = "Current Tab: " + menuEntries[menuTab] + ", Entry #" + menuTab + "\n Proper Entry: " + (menuTab + 1);*/
-
-					if (menuTab < 0){ // If menuTab is less than 0.
-							menuTab = 3;
-						}
-					if (menuTab > 3){ // If menuTab is 4, wrap around to 0.
-							menuTab = 0;
-						}
-
+					tsp.text = "Current Tab: " + menuEntries[menuTab] + ", Entry #" + menuTab + "\n Proper Entry: " + (menuTab + 1);
 
 		if (canSwitchTabs){ // The inputs can be accessed within the substates, so they can easily work.
 				trace("Before: " + menuTab);
 				if (FlxG.keys.justPressed.Q)
 				{
 						menuPrimaryButtons.members[menuTab].animation.play("idle");
-						//menuTab -= 1;
-						if (menuTab >= 0){ // If menuTab is 0 or higher.
-							pageSwitch(-1);
-						}else{ // If menuTab is -1, wrap around to 3.
 							menuTab = 3;
-						}
-
 				}
 				if (FlxG.keys.justPressed.E)
 				{
-					//openSubState(new HomeMesu());
 					menuPrimaryButtons.members[menuTab].animation.play("idle");
-					//menuTab += 1;
-					/*if (menuTab > 3){
-							pageSwitch(1);
-						}else{
-							menuTab = 0;
-						}*/
-					if (menuTab > 3){ // If menuTab is 4, wrap around to 0.
-							menuTab = 0;
-						}else{ // If menuTab isn't 4.
-							pageSwitch(1);
-					}
+					pageSwitch(1);
+
 				}
 				trace("After: " + menuTab);
 		}
