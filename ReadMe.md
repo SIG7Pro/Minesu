@@ -6,9 +6,7 @@
 (WIP description.)
 
 ## Disclaimer
-- This is my first attempt at something like this. Please have patience!
-- Due to this intending to be a "smaller" launcher app/frontend, **many features you would expect may not be included**.
-- This is multi-platform for the major desktop operating systems!
+This is my first attempt at this type of launcher software stuff. It isn't meant to be full-featured, so some features may not be included. In addition, this is primarily focused for desktop, so an Android version *will not* be made.
 
 ## System Requirements
 ### Minimum Specs
@@ -17,14 +15,12 @@
 - CPU: Unknown
 ### Recommended Specs:
 - RAM: 16 GB
+### Tested
+Tested on:
+- Windows 11 w/ 16 GB RAM: Working, primary dev machine, virtualized in Hashlink and natively.
+- Windows 7 with 4GB RAM: Working, outdated build, virtualized.
 
-## Compiling
-Open your default command prompt and type in:
-
-`lime test sys` (replacing sys with your platform of choice, which includes Hashlink.)
-
-***This is to be done after all the requirements are met!*** Also unless old versions of Haxe are used, you cannot compile for macOS 10.12 or earlier.
-
+## Building the Software
 #### Requirements:
 - [Haxe](https://haxe.org/download/)
 - [HaxeFlixel](https://haxeflixel.com/documentation/install-haxeflixel/)
@@ -35,17 +31,21 @@ As HaxeFlixel and both hxdiscord_rpc are both haxelibs, you can easily type:
 `haxelib install haxeflixel` and `haxelib install hxdiscord_rpc` to install the libraries.
 In addition, the average computer should be able to compile it.
 
-#### Tested
-Tested on:
-- Windows 11 w/ 16 GB RAM: Working, primary dev machine, virtualized in Hashlink and natively.
-- Windows 7 with 4GB RAM: Working, outdated build, virtualized.
+
+### Compiling
+Open your default command prompt and type in:
+
+`lime test sys` (replacing sys with your platform of choice, which includes Hashlink.)
+
+***This is to be done after all the requirements are met!*** 
+
 
 ##### System Specific
-Windows requires a version of Microsoft Visual Studio to compile it. As far as I know, Visual Studio Community 2019 compiles it perfectly.
+Windows requires a version of Microsoft Visual Studio to compile HaxeFlixel software easily as far as I know. Visual Studio Community 2019 yields the best results. I may consider seeing if there's a way to get other compilers working.
 
 Linux has no specific requirements.
 
-macOS may require "xcode-tools" (or whatever it's called) for compiling, but I do not know if they're required. Also requires macOS 10.13.6 (High Sierra) or later in order to compile, unless if you were to use an earlier version of Haxe, and in turn possibly earlier versions of the libraries required, but this is not supported and is prone to issues.
+macOS may require "xcode-tools" (or whatever it's called) for compiling, but I do not know if they're required. Also unless old versions of Haxe are used, you cannot compile for macOS 10.12 or earlier.
 
 Hashlink compiles perfectly outside of the box, however it lacks Discord RPC by default.
 - While the haxelib used is incompatible with Hashlink (only works on native, C++ targets, which HL isn't), it does get recognized by Discord if you've put it into the "Recognized Games" tab. Presumably best if done after testing a native build.
@@ -55,14 +55,12 @@ Hashlink compiles perfectly outside of the box, however it lacks Discord RPC by 
 - [ ] Open app from configuration.
 - [ ] Add proper settings
 ### Middle Priority
-- [ ] ???
 - [ ] Segmented Theming
         - (Themes with multiple segments that can be interchanged. Refer to Cocoon Launcher, Opera GX, or Vivaldi.)
 - [ ] Controller Support
 - [ ] Alphabet View of Games (Brief mind stuff, USB Loader GX)
 ### Low Priority
 - [ ] Dark Mode
-- [ ] ???
 - [ ] Icon adjustments per platform and possibly per-theme.
 
 ## Features Excluded:
@@ -77,7 +75,7 @@ Hashlink compiles perfectly outside of the box, however it lacks Discord RPC by 
 
 ## Assets
 
-To be documented when project is more complete.
+To be documented when project is more complete. Especially for when themes are made and supported.
 
 ## Source Code
 

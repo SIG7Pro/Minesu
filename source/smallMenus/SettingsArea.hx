@@ -7,14 +7,6 @@ import flixel.FlxSubState;
 //import flixel.group.FlxSpriteGroup;
 //import smallMenus.MenuIcon;
 
-import haxe.ui.HaxeUIApp;
-import haxe.ui.ComponentBuilder;
-//import haxe.uitl.Logger; // ? //
-
-//
-import haxe.ui.components.Button;
-import haxe.ui.containers.VBox;
-import haxe.ui.core.Screen;
 
 
 class SettingsArea extends FlxSubState
@@ -37,26 +29,6 @@ class SettingsArea extends FlxSubState
 				deg.updateHitbox();
 				add(deg);
 
-		/*var app = new HaxeUIApp();
-		app.ready(
-			function() {
-				var main = ComponentBuilder.fromFile("assets/data/test.xml"); // whatever your XML layout path is
-				app.addComponent(main);
-				app.start();
-			}
-		);*/
-
-		var main = new VBox();
-
-		var button1 = new Button();
-		button1.text = "Button 1";
-		main.addComponent(button1);
-
-		var button2 = new Button();
-		button2.text = "Button 2";
-		main.addComponent(button2);
-
-		Screen.instance.addComponent(main);
 
 
 
@@ -64,6 +36,7 @@ class SettingsArea extends FlxSubState
 
 
 	}
+
 
 	override function update(elapsed:Float){
 

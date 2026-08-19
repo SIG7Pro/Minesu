@@ -7,6 +7,7 @@ import flixel.FlxState;
 import flixel.text.FlxText;
 import Sys; // For name detection.
 import Date; // For the date
+import DateTools;
 import flixel.group.FlxGroup.FlxTypedGroup; // For menu buttons.
 
 /* For submenus */
@@ -188,46 +189,56 @@ var changeValue:Int; // for one function just so i can reference it omg
 		super.update(elapsed);
 		appGetDate();
 
+		if (menuTab > 0)
+			mainText.text = menuEntries[menuTab];
+		else
+			mainText.text = nameTitle;
+
+
+
 					tsp.text = "Current Tab: " + menuEntries[menuTab] + ", Entry #" + menuTab + "\n Proper Entry: " + (menuTab + 1);
 
 		if (canSwitchTabs){ // The inputs can be accessed within the substates, so they can easily work.
-				trace("Before: " + menuTab);
+				//trace("Before: " + menuTab);
 				if (FlxG.keys.justPressed.Q)
 				{
-						menuPrimaryButtons.members[menuTab].animation.play("idle");
-							menuTab = 3;
+						menuPrimaryButtons.members[menuTab + 1].animation.play("idle");
+						pageSwitch(-1);
 				}
 				if (FlxG.keys.justPressed.E)
 				{
-					menuPrimaryButtons.members[menuTab].animation.play("idle");
-					pageSwitch(1);
-
+						menuPrimaryButtons.members[menuTab + 1].animation.play("idle");
+						pageSwitch(1);
 				}
-				trace("After: " + menuTab);
+				//trace("After: " + menuTab);
 		}
 
 	}
 
 
 	function pageSwitch(changeValue:Int){
-
+				canSwitchTabs = false;
 				trace(menuEntries[menuTab]);
 
-				/*if (changeValue < 0){ // For values in the negatives.
-				menuTab +
-				}else if (changeValue < 0){ // For values in the positives.
-
-				}*/
-
 				//if (changeValue == null){changeValue = 1;}
-				menuTab += changeValue;
-				trace("Changed value by:" + changeValue);
+				//menuTab += changeValue;
+				trace("Changed value by:" + changeValue + ". Value now: " + menuTab);
 
 				//if (menuTab > -1 || menuTab < 4){
-				if (menuTab != -1 || menuTab != 4){ // Checks if it's not either -1 or +4.
+				if (menuTab > -1 && menuTab < 4){ // Checks if it's inbetween -1 & +4.
 					menuPrimaryButtons.members[menuTab].animation.play("select");
 					trace("true");
-				}else{
+
+
+					menuTab += changeValue;
+					trace("Changed value successfully!");
+					var timer:FlxTimer = new FlxTimer();
+							timer.start(0.1, // For a small delay.
+							(_) -> {
+								canSwitchTabs = true;
+
+								}
+							);
 
 				}
 
@@ -245,7 +256,9 @@ var changeValue:Int; // for one function just so i can reference it omg
 
 	function appGetDate(){ // to whoever sees the first commit of this, say thank you to spile from the haxe discord
 		var now = Date.now();
-		var hourTwelve:String;
+		var curDate = DateTools;
+		var formattedTime:String;
+		/*var hourTwelve:String;
 		//trace(now.getDay());
 
 		isPMTime = (now.getHours() > 12) ? true: false;
@@ -258,14 +271,24 @@ var changeValue:Int; // for one function just so i can reference it omg
 					hourTwelve = ("" + now.getHours());
 			}
 
-		}
+		}*/
 
-			currentDate = "" + (now.getMonth() + 1) + "/" + (now.getDate()) + " - " + // MM/DD
-			hourTwelve  + ":" + padZero("" + now.getMinutes()) +  (if (isPMTime) " PM" else " AM") + // Hours + Minutes + AMPM
-			#if debug "\nDebug Build"; // I'd make this a one-liner, but I'd get a weird error if I did.
+			/*statisticsText.text  = "" + (now.getMonth() + 1) + "/" + (now.getDate()) + " - " + // MM/DD
+			hourTwelve  + ":" + padZero("" + now.getMinutes()) +  (if (isPMTime) " PM" else " AM") + // Hours + Minutes + AMPM*/
+			/* https://www.geeksforgeeks.org/python/python-strftime-function/ */
+			//statisticsText.text  = DateTools.format(now, "%A %-m %-d") + DateTools.format(now, "%-l %M");
+			formattedTime = (DateTools.format(now, "%A %m/%d -%l:%M %p"));
+			//trace(formattedTime);
+			statisticsText.text = formattedTime + // add system username here LOL
+			// %Y-%m-%d_%H:%M:%S
+			#if debug
+				"\nDebug Build" + // I'd make this a one-liner, but I'd get a weird error if I did.
 			#end
+			" ";
 
-			statisticsText.text = currentDate;
+
+
+			//statisticsText.text = currentDate; //Invallid assign.
 			// Seconds for if I get to put an option to add seconds to the menu. /* + ":" padZero("" + now.getSeconds()) +*/
     }
 
