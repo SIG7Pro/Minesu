@@ -67,14 +67,7 @@ var changeValue:Int; // for one function just so i can reference it omg
  		persistentDraw = true;
 		super.create();
 		createWallpaper();
-		//#if hl // Could be made into an option soon.
-		//var skidaddble:Int = 0;
-				lime.app.Application.current.window.opacity = 0;
-		//function tweenFunction(s:FlxSprite, v:Float) { lime.app.Application.current.window.opacity = skidaddble; };
-
-		///var titleTween:FlxTween;
-		//titleTween = FlxTween.num = (0, skidaddble, type: ONESHOT, {lime.app.Application.current.window.opacity = value;});
-		//titleTween.num = (0, 1, 1, {type: ONESHOT}, (_) -> {lime.app.Application.current.window.opacity = value;});
+		lime.app.Application.current.window.opacity = 0;
 		backgroundHome.alpha = 1;
 		FlxTween.tween(lime.app.Application.current.window, {opacity: 1}, 0.5, {type: FlxTweenType.ONESHOT, ease: FlxEase.cubeOut});
 
@@ -258,38 +251,16 @@ var changeValue:Int; // for one function just so i can reference it omg
 		var now = Date.now();
 		var curDate = DateTools;
 		var formattedTime:String;
-		/*var hourTwelve:String;
-		//trace(now.getDay());
 
-		isPMTime = (now.getHours() > 12) ? true: false;
-		if (isPMTime){
-			hourTwelve = ("" + (now.getHours() - 12)); // Gets hour of the day and subtracts it by 12 for the proper time in the P.Ms.
-		}else{
-			if (now.getHours() == 0){
-					hourTwelve = ("12"); // To solve hours such as 12 AM being listed as 0 AM.
-			}else{
-					hourTwelve = ("" + now.getHours());
-			}
-
-		}*/
-
-			/*statisticsText.text  = "" + (now.getMonth() + 1) + "/" + (now.getDate()) + " - " + // MM/DD
-			hourTwelve  + ":" + padZero("" + now.getMinutes()) +  (if (isPMTime) " PM" else " AM") + // Hours + Minutes + AMPM*/
 			/* https://www.geeksforgeeks.org/python/python-strftime-function/ */
-			//statisticsText.text  = DateTools.format(now, "%A %-m %-d") + DateTools.format(now, "%-l %M");
 			formattedTime = (DateTools.format(now, "%A %m/%d -%l:%M %p"));
 			//trace(formattedTime);
 			statisticsText.text = formattedTime + // add system username here LOL
-			// %Y-%m-%d_%H:%M:%S
 			#if debug
 				"\nDebug Build" + // I'd make this a one-liner, but I'd get a weird error if I did.
 			#end
 			" ";
 
-
-
-			//statisticsText.text = currentDate; //Invallid assign.
-			// Seconds for if I get to put an option to add seconds to the menu. /* + ":" padZero("" + now.getSeconds()) +*/
     }
 
     function padZero(s:String):String {

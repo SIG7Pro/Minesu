@@ -14,8 +14,8 @@ import Sys; //lowercase and uppercase Sys aer differetn!
 
 class Start extends FlxState
 {
-
-// sys.io.File.getContent('assets/data/v1Credits.txt')
+	// Last modified: November 19th, 2025
+	// sys.io.File.getContent('assets/data/v1Credits.txt')
 	//var referenceFile = sys.io.File.getContent('assets/data/test_execute.json');
 	var parsedFile = haxe.Json.parse(sys.io.File.getContent('assets/data/test_execute.json'));
 	var commandA:String;
@@ -59,8 +59,6 @@ class Start extends FlxState
 
 	function onButtonClicked()
 	{
-		//commandA = 'cd ' + parsedFile.path + '" ';
-		//commandB = '' + parsedFile.file + ' "' + parsedFile.rom + '"';
 
 		commandA = parsedFile.path + parsedFile.file + ' "' + parsedFile.rom + '"'; // Reason the rom area is put in "" is since I have it saved in a folder with a space, and it seems to break that way.
 		commandB = " ";

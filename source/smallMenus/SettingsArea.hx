@@ -3,11 +3,6 @@ package smallMenus;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
-//import flixel.group.FlxGroup.FlxTypedGroup;
-//import flixel.group.FlxSpriteGroup;
-//import smallMenus.MenuIcon;
-
-
 
 class SettingsArea extends FlxSubState
 {
