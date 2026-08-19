@@ -189,19 +189,20 @@ var changeValue:Int; // for one function just so i can reference it omg
 
 
 
-					tsp.text = "Current Tab: " + menuEntries[menuTab] + ", Entry #" + menuTab + "\n Proper Entry: " + (menuTab + 1);
+//					tsp.text = "Current Tab: " + menuEntries[menuTab] + ", Entry #" + menuTab + "\n Proper Entry: " + (menuTab + 1);
+tsp.text = "Current Tab: " + menuTab + ", Intended Tab: " + menuEntries[menuTab] ;
 
 		if (canSwitchTabs){ // The inputs can be accessed within the substates, so they can easily work.
 				//trace("Before: " + menuTab);
 				if (FlxG.keys.justPressed.Q)
 				{
-						menuPrimaryButtons.members[menuTab + 1].animation.play("idle");
-						pageSwitch(-1);
+						//menuPrimaryButtons.members[menuTab].animation.play("idle");
+						pageSwitch(-1, false);
 				}
 				if (FlxG.keys.justPressed.E)
 				{
-						menuPrimaryButtons.members[menuTab + 1].animation.play("idle");
-						pageSwitch(1);
+						//menuPrimaryButtons.members[menuTab + 1].animation.play("idle");
+						pageSwitch(1, false);
 				}
 				//trace("After: " + menuTab);
 		}
@@ -209,7 +210,7 @@ var changeValue:Int; // for one function just so i can reference it omg
 	}
 
 
-	function pageSwitch(changeValue:Int){
+	/*function pageSwitch(changeValue:Int){
 				canSwitchTabs = false;
 				trace(menuEntries[menuTab]);
 
@@ -242,6 +243,29 @@ var changeValue:Int; // for one function just so i can reference it omg
 				}
 				if (menuTab == 2){ // Will be replaced with a case switch soon.
 							openSubState(new SettingsArea());
+				}
+
+	}*/
+	function pageSwitch(changeValue:Int, funcReload:Bool = false){ // funcReload does not do anything other than serving as an identifier as to if the function reran itself.
+	menuPrimaryButtons.members[menuTab].animation.play("idle");
+	tsp.text = "Current Tab: " + menuTab + ", Intended Tab: " + menuEntries[menuTab] ;
+
+	canSwitchTabs = false;
+	//trace(menuEntries[menuTab]);
+	menuTab += changeValue;
+	trace("Changed value by: " + changeValue + ". New value: " + menuTab);
+
+				if (menuTab > -1 && menuTab < 4){ // Checks if it's inbetween -1 & +4.
+					menuPrimaryButtons.members[menuTab].animation.play("select");
+					trace("true");
+					canSwitchTabs = true;
+				}else{
+					if (menuTab < 0) // If the value is under zero, then it adds three. So -1 would become 3, which would be the final entry.
+						menuTab += 4;
+					if (menuTab > 3) // If the value is above three, then it rolls back four. So 4 would become 0, which would be the first menu entry.
+						menuTab -= 4;
+
+					pageSwitch(0, true);
 				}
 
 	}
