@@ -16,16 +16,21 @@
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
-	<window width="1280" height="720" fps="60" background="#0000FF" hardware="true" vsync="false" />
-
-	<!--HTML5-specific-->
-	<window if="html5" resizable="false" /> <!-- Supporting HTML would require too much code to be removed or rewritten for a fraction of the utility. -->
-
+			<window width="1280" height="720" fps="60" background="#0000FF" hardware="true" vsync="false" /> 	<!-- While the app is designed for 1080p, it's set to 720p for non-fullscreen users. -->
 	<!--Desktop-specific-->
-	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />
+			<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />
+
+
+			<!-- Modified example config. -->
+	<!--HTML5-specific-->
+	<window if="html5" resizable="false"> <!-- Supporting HTML would require too much code to be removed or rewritten for a fraction of the utility. -->
+			<log error="This software is incompatible with HTML5." />
+	</window>
 
 	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" />
+	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0">
+			<log warn="This software is not intended to be compiled for mobile devices. Issues discovered will not be adressed. Run at your own risk." />
+	</window>
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
@@ -56,7 +61,7 @@
 	<!--<haxedef name="FLX_RECORD" />-->
 
 	<!--Disable the right and middle mouse buttons-->
-	<!--<haxedef name="FLX_NO_MOUSE_ADVANCED" />-->
+	<haxedef name="FLX_NO_MOUSE_ADVANCED" />
 
 	<!--Disable the native cursor API on Flash-->
 	<!--<haxedef name="FLX_NO_NATIVE_CURSOR" />-->

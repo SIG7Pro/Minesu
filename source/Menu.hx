@@ -158,6 +158,7 @@ var changeValue:Int; // for one function just so i can reference it omg
 			}
 
 		}
+		pageSwitch(0, false);
 
 
 
@@ -189,8 +190,8 @@ var changeValue:Int; // for one function just so i can reference it omg
 
 
 
-//					tsp.text = "Current Tab: " + menuEntries[menuTab] + ", Entry #" + menuTab + "\n Proper Entry: " + (menuTab + 1);
-tsp.text = "Current Tab: " + menuTab + ", Intended Tab: " + menuEntries[menuTab] ;
+		//	tsp.text = "Current Tab: " + menuEntries[menuTab] + ", Entry #" + menuTab + "\n Proper Entry: " + (menuTab + 1);
+		tsp.text = "Current Tab: " + menuTab + ", Intended Tab: " + menuEntries[menuTab] ;
 
 		if (canSwitchTabs){ // The inputs can be accessed within the substates, so they can easily work.
 				//trace("Before: " + menuTab);
